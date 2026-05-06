@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. ZHOU Bo 周博博士 - Academic Portfolio</title>
+    <!-- Premium Editorial Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === COLOR PALETTE & VARIABLES === */
+        :root {
+            --clr-bg: #FAF9F6;          /* Gallery Off-White */
+            --clr-surface: #FFFFFF;     /* Pure White */
+            --clr-text-main: #2A2A2A;   /* Deep Charcoal */
+            --clr-text-muted: #757575;  /* Slate Gray */
+            --clr-red: #B91C1C;         /* Academic Crimson */
+            --clr-border: #E5E5E5;      /* Crisp, subtle lines */
+            --clr-gold: #F5A623;        /* Dark Yellow for video title */
+            
+            --font-sans: 'Inter', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-cn: 'Noto Serif SC', serif;
+            
+            --transition-fast: 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* === GLOBAL RESETS === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--clr-bg);
+            color: var(--clr-text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        /* === PROGRESS BAR & NAVIGATION === */
+        .progress-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: transparent; z-index: 1001;
+        }
+        #progress-bar {
+            height: 100%; width: 0%;
+            background: var(--clr-red);
+            transition: width 0.1s;
+        }
+        nav {
+            position: fixed;
+            top: 3px; left: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(250, 249, 246, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--clr-border);
+            z-index: 1000;
+            transition: var(--transition-fast);
+        }
+        .nav-logo {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--clr-text-main);
+            letter-spacing: 1px;
+        }
+        .nav-logo span { color: var(--clr-red); }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--clr-text-muted);
+            transition: var(--transition-fast);
+        }
+        .nav-links a:hover { color: var(--clr-red); }
+
+        /* === LAYOUT STRUCTURE === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 100px;
+            position: relative;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            width: 100%;
+            align-items: center;
+        }
+        
+        /* Animated Title */
+        .hero-title {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 5vw, 5rem);
+            line-height: 1.1;
+            color: var(--clr-text-main);
+            margin-bottom: 5px;
+        }
+        .hero-title .dot { color: var(--clr-red); }
+        .hero-title-cn {
+            font-family: var(--font-cn);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            color: var(--clr-text-main);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        /* Staggered Animation Classes */
+        .char-span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-roles {
+            border-left: 3px solid var(--clr-red);
+            padding-left: 25px;
+            margin-bottom: 40px;
+        }
+        .role-en {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--clr-text-main);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .role-cn {
+            font-family: var(--font-cn);
+            font-size: 1.1rem;
+            color: var(--clr-text-muted);
+            line-height: 1.7;
+        }
+        .hero-intro {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--clr-text-main);
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .hero-intro-cn {
+            font-family: var(--font-cn);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--clr-text-muted);
+        }
+
+        /* Portrait */
+        .portrait-wrapper {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            background: #EAE8E3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--clr-text-muted);
+            font-weight: 500;
+            letter-spacing: 2px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+        .portrait-wrapper::after {
+            content: ''; position: absolute; inset: -15px;
+            border: 1px solid var(--clr-border);
+            z-index: -1;
+        }
+
+        /* === SECTION ARCHITECTURE === */
+        section {
+            padding: 140px 0;
+            position: relative;
+            border-bottom: 1px solid var(--clr-border);
+        }
+        /* Massive Background Numbering */
+        .section-number {
+            position: absolute;
+            top: 80px; left: 0;
+            font-family: var(--font-serif);
+            font-size: 12rem;
+            line-height: 1;
+            color: rgba(0,0,0,0.03);
+            z-index: -1;
+            pointer-events: none;
+        }
+        .section-header {
+            margin-bottom: 60px;
+            padding-left: 20px;
+        }
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--clr-text-main);
+            line-height: 1.2;
+        }
+        .section-header .cn {
+            display: block;
+            font-family: var(--font-cn);
+            font-size: 1.5rem;
+            color: var(--clr-text-muted);
+            margin-top: 10px;
+            font-weight: 400;
+        }
+
+        /* === SHARED LIST/GRID LAYOUTS === */
+        .exhibit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+        .exhibit-item {
+            padding-top: 20px;
+            border-top: 2px solid var(--clr-text-main);
+        }
+        .exhibit-year {
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--clr-red);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .exhibit-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            color: var(--clr-text-main);
+            margin-bottom: 5px;
+        }
+        .exhibit-title-cn {
+            font-family: var(--font-cn);
+            font-size: 1.1rem;
+            color: var(--clr-text-muted);
+            margin-bottom: 15px;
+        }
+        .exhibit-desc { font-size: 0.95rem; font-weight: 300; line-height: 1.7; color: var(--clr-text-main); }
+        .exhibit-desc-cn { font-family: var(--font-cn); font-size: 0.95rem; color: var(--clr-text-muted); margin-top: 10px; }
+
+        /* === CINEMATIC VIDEO MODULE & PHOTO GALLERIES === */
+        .video-module {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #1c1c1c 0%, #3a1e12 100%);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        }
+        .video-module::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+        }
+        .video-module:hover .video-bg { transform: scale(1.03); }
+        .video-overlay {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 40px; z-index: 2;
+        }
+        .play-icon {
+            width: 70px; height: 70px;
+            border: 1px solid rgba(255,255,255,0.4);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: #FFF;
+            margin-bottom: 25px; transition: var(--transition-fast);
+            padding-left: 5px; backdrop-filter: blur(5px);
+        }
+        .video-module:hover .play-icon { background: var(--clr-red); border-color: var(--clr-red); transform: scale(1.1); }
+        .vid-title-cn {
+            font-family: var(--font-cn);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--clr-gold); /* Dark Yellow */
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .vid-title-en {
+            font-family: var(--font-sans);
+            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+            color: #FFFFFF;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-top: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .vid-platform {
+            margin-top: 25px;
+            font-size: 0.8rem; letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 6px 20px; border-radius: 30px;
+            text-transform: uppercase;
+        }
+
+        /* 16:9 Photo Gallery Setup */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .photo-169 {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #EAE8E3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--clr-text-muted);
+            font-family: var(--font-sans);
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid var(--clr-border);
+            transition: var(--transition-fast);
+        }
+        .photo-169:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        /* === BILINGUAL LISTS === */
+        .report-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+            margin-bottom: 50px;
+        }
+        ul.clean-list { list-style: none; }
+        ul.clean-list li {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--clr-border);
+        }
+        ul.clean-list li strong { font-family: var(--font-cn); font-size: 1.1rem; color: var(--clr-text-main); display: block; margin-bottom: 5px; transition: var(--transition-fast); }
+        ul.clean-list li span { font-size: 0.95rem; color: var(--clr-text-muted); font-weight: 300; display: block; transition: var(--transition-fast); }
+        
+        .report-link { display: block; text-decoration: none; transition: var(--transition-fast); }
+        .report-link:hover strong, .report-link:hover span { color: var(--clr-red); }
+
+        .btn-link {
+            display: inline-flex; align-items: center;
+            font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            color: var(--clr-red); border-bottom: 1px solid var(--clr-red);
+            margin-right: 20px; margin-top: 10px; padding-bottom: 2px; transition: var(--transition-fast);
+        }
+        .btn-link:hover { color: var(--clr-text-main); border-color: var(--clr-text-main); }
+
+        /* === EXHIBITION DIRECTORY TABLE === */
+        .directory-table {
+            width: 100%; border-collapse: collapse;
+        }
+        .directory-table th {
+            text-align: left; padding: 20px 0;
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--clr-text-muted); border-bottom: 2px solid var(--clr-text-main);
+        }
+        .directory-table td {
+            padding: 30px 20px 30px 0;
+            vertical-align: top;
+            border-bottom: 1px solid var(--clr-border);
+        }
+        .dir-year { font-family: var(--font-serif); font-size: 1.3rem; color: var(--clr-text-main); }
+        .dir-event-en { font-weight: 600; color: var(--clr-text-main); display: block; margin-bottom: 5px; }
+        .dir-event-cn { font-family: var(--font-cn); color: var(--clr-text-muted); font-size: 0.95rem; display: block; margin-bottom: 5px;}
+        .dir-org { font-size: 0.85rem; color: var(--clr-text-muted); font-style: italic; }
+        .dir-highlight { color: var(--clr-red); font-weight: 600; display: block; margin-top: 10px; }
+
+        .table-preface {
+            font-family: var(--font-serif);
+            font-size: 1.25rem; font-style: italic; color: var(--clr-text-main);
+            border-left: 3px solid var(--clr-red); padding-left: 20px; margin-bottom: 60px; line-height: 1.6;
+        }
+
+        /* === SCROLL ANIMATIONS === */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero { padding-top: 150px; }
+            .nav-links { display: none; }
+            section { padding: 80px 0; }
+            .section-number { font-size: 8rem; top: 40px; }
+            .report-grid { grid-template-columns: 1fr; gap: 30px; }
+            .directory-table th { display: none; }
+            .directory-table td { display: block; padding: 15px 0; border: none; }
+            .directory-table tr { border-bottom: 1px solid var(--clr-border); padding: 20px 0; display: block; }
+            .dir-year { margin-bottom: 10px; color: var(--clr-red); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP NAVIGATION & PROGRESS BAR -->
+    <div class="progress-container"><div id="progress-bar"></div></div>
+    <nav>
+        <div class="nav-logo">ZHOU<span>.</span></div>
+        <div class="nav-links">
+            <a href="#education">Education</a>
+            <a href="#media">Media</a>
+            <a href="#awards">Awards</a>
+            <a href="#service">Service</a>
+            <a href="#scholarship">Scholarship</a>
+            <a href="#students">Mentorship</a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- HERO SECTION -->
+        <section class="hero">
+            <div class="hero-grid">
+                <div class="hero-text">
+                    <!-- Title for JS Animation -->
+                    <h1 class="hero-title" id="title-en" data-text="Dr. ZHOU Bo."></h1>
+                    <div class="hero-title-cn" id="title-cn" data-text="周博博士"></div>
+                    
+                    <div class="hero-roles animate-on-scroll" style="transition-delay: 0.4s;">
+                        <div class="role-en">Senior Lecturer & CHAMPINE Programme Coordinator, the Chinese Language Education and Assessment Centre (CLEAC)<br>Warden, the Jockey Club Hostel (F), Office of Student Affairs (OSA)</div>
+                        <div class="role-cn">中國語文教學與測試中心 高級講師 及 燦品中文+統籌<br>學生事務處下轄賽馬會驥德堂（F座）舍監</div>
+                        <div style="margin-top: 15px; font-size: 0.9rem; color: var(--clr-text-muted); text-transform: uppercase; letter-spacing: 1px;">Lingnan University / 嶺南大學</div>
+                    </div>
+                    
+                    <div class="hero-intro animate-on-scroll" style="transition-delay: 0.5s;">
+                        As a Senior Lecturer and Coordinator of the CHAMPINE Programme at the Chinese Language Education and Assessment Centre (CLEAC), alongside my role as Warden of the Jockey Club Hostel (F) of Office of Student Affairs (OSA) at Lingnan University, I am deeply committed to advancing Chinese language education, cultural heritage, and Putonghua proficiency. My career bridges academic excellence with student residential leadership, driven by a passion to inspire youth, foster cross-cultural appreciation, guide students to achieve outstanding success on national platforms, and champion sustainable social development (ESG) through dedicated youth service.
+                    </div>
+                    <div class="hero-intro-cn animate-on-scroll" style="transition-delay: 0.6s;">
+                        現任嶺南大學中國語文教學與測試中心（CLEAC）高級講師及「燦品中文+（CHAMPINE）」統籌，並擔任學生事務處下轄賽馬會驥德堂（F座）舍監。本人深耕於中國語文教育、中華文化傳承與普通話測試領域，始終秉持「作育英才，服務社會」的信念，積極推動社會可持續發展（ESG）與青年服務，致力透過創新的教學模式與豐富的文化體驗啟發學生潛能，並帶領學子在全國性大型比賽中屢創佳績。
+                    </div>
+                </div>
+                
+                <div class="portrait-wrapper animate-on-scroll" style="transition-delay: 0.8s;">
+                    <img src="VictorZhou.jpg" alt="Dr. ZHOU Bo" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education" class="animate-on-scroll">
+            <div class="section-number">01</div>
+            <div class="section-header">
+                <h2>Education</h2>
+                <span class="cn">學歷背景</span>
+            </div>
+            
+            <div class="exhibit-grid">
+                <div class="exhibit-item">
+                    <div class="exhibit-year">Ph.D.</div>
+                    <div class="exhibit-title">Doctor of Philosophy</div>
+                    <div class="exhibit-title-cn">哲學博士（中國古典文學）</div>
+                    <div class="exhibit-desc">in Chinese Classical Literature<br>Beijing Normal University</div>
+                    <div class="exhibit-desc-cn">北京師範大學</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">M.A.</div>
+                    <div class="exhibit-title">Master of Arts</div>
+                    <div class="exhibit-title-cn">文學碩士（語言學）</div>
+                    <div class="exhibit-desc">in Linguistics<br>City University of Hong Kong</div>
+                    <div class="exhibit-desc-cn">香港城市大學</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">B.A. (Hons)</div>
+                    <div class="exhibit-title">Bachelor of Arts</div>
+                    <div class="exhibit-title-cn">榮譽文學士（語言學及語言科技）</div>
+                    <div class="exhibit-desc">in Linguistics & Language Technology<br>City University of Hong Kong</div>
+                    <div class="exhibit-desc-cn">香港城市大學</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MEDIA -->
+        <section id="media" class="animate-on-scroll">
+            <div class="section-number">02</div>
+            <div class="section-header">
+                <h2>Media & Exhibitions</h2>
+                <span class="cn">媒體報道與精選活動</span>
+            </div>
+            
+            <!-- CINEMATIC VIDEO HERO -->
+            <a href="https://m.yangshipin.cn/video?type=0&vid=c000049avwh" target="_blank" class="video-module">
+                <div class="video-overlay">
+                    <div class="play-icon">▶</div>
+                    <h3 class="vid-title-cn">学好普通话 | 薪火共相传</h3>
+                    <div class="vid-title-en">Learn Putonghua Well | Passing on the Torch</div>
+                    <div class="vid-platform">Platform: 央视频 (Yangshipin)</div>
+                </div>
+            </a>
+            
+            <div class="report-grid">
+                <div>
+                    <h4 style="color:var(--clr-text-main); font-size:1.1rem; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase;">Award Reports / 獎項報道</h4>
+                    <ul class="clean-list">
+                        <li><strong>全國大學生藝術展演</strong><span>National University Student Art Exhibition</span></li>
+                        <li><strong>齊越節暨全國大學生朗誦大會</strong><span>Qiyue Recitation Festival & National Recitation Competition</span></li>
+                        <li><strong>蘇港澳高校中華經典誦讀展演</strong><span>Jiangsu, HK & Macau Chinese Classics Recitation</span></li>
+                        <li><strong>喚醒耳朵展演——深港澳大學生展演</strong><span>"Awakening the Ears" Shenzhen, HK & Macau Exhibition</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color:var(--clr-text-main); font-size:1.1rem; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase;">Activity Reports / 活動報道</h4>
+                    <ul class="clean-list">
+                        <li>
+                            <a href="https://www.tkww.hk/a/202506/23/AP6858b0d3e4b0e169b1355a0c.html" target="_blank" class="report-link">
+                                <strong>【大公文匯報】「尋覓華韻」中國語言及文化學習團</strong>
+                                <span>Ta Kung Wen Wei: "Exploring Chinese Charisma" Study Group</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://zijing.com.cn/web/article/1456718333584556032/web/content_1456718333584556032.html" target="_blank" class="report-link">
+                                <strong>【紫荊報】2025“燕园文华”中华文化体验营</strong>
+                                <span>Bauhinia: 2025 "Yanyuan Wenhua" Chinese Cultural Experience Camp</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div style="margin-top: 30px;">
+                        <a href="https://mp.weixin.qq.com/s/_64wmi4AMo73RsYocDmxgw" target="_blank" class="btn-link">周博老師：「成長啟示錄」跨領域、目標感與理性追光 【中港友聲協會專訪（上）】</a>
+                        <a href="https://mp.weixin.qq.com/s/nyz8BTSvafJZAYjlWwCF1g" target="_blank" class="btn-link">周博老師：「成長啟示錄」跨領域、目標感與理性追光 【中港友聲協會專訪（下）】</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AWARDS -->
+        <section id="awards" class="animate-on-scroll">
+            <div class="section-number">03</div>
+            <div class="section-header">
+                <h2>Honors & Awards</h2>
+                <span class="cn">個人獎項殊榮</span>
+            </div>
+
+            <!-- 16:9 PHOTO GALLERY -->
+            <div class="photo-gallery">
+                <img src="無障礙網站.jpg" alt="無障礙網頁金獎" class="photo-169" style="object-fit: cover;">
+                <img src="Office.jpg" alt="Honors & Awards" class="photo-169" style="object-fit: cover;">
+            </div>
+            
+            <div class="exhibit-grid">
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2024</div>
+                    <div class="exhibit-title">Teaching Excellence</div>
+                    <div class="exhibit-title-cn">優秀指導教師獎</div>
+                    <div class="exhibit-desc">The 7th National Student Art Exhibition and Performance Competition. Ministry of Education of the PRC.</div>
+                    <div class="exhibit-desc-cn">全國第七屆大學生藝術展演。中華人民共和國教育部。</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2024–2025</div>
+                    <div class="exhibit-title">Gold Award</div>
+                    <div class="exhibit-title-cn">無障礙網頁金獎（網站組別）</div>
+                    <div class="exhibit-desc">Digital Accessibility Recognition Scheme for CLEAC’s New Official Website. HKIRC & Digital Policy Office.</div>
+                    <div class="exhibit-desc-cn">中國語文教學與測試中心新官方網頁。由香港互聯網註冊管理有限公司主辦。</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2023</div>
+                    <div class="exhibit-title">Outstanding Work & Teaching</div>
+                    <div class="exhibit-title-cn">優秀作品及優秀指導教師獎</div>
+                    <div class="exhibit-desc">24th & 25th Qiyue Recitation Festival & National University Student Recitation Competition.</div>
+                    <div class="exhibit-desc-cn">第24屆及第25屆齊越朗誦藝術節暨全國大學生朗誦大會。</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2023</div>
+                    <div class="exhibit-title">Nomination Award</div>
+                    <div class="exhibit-title-cn">提名獎（團隊負責人）</div>
+                    <div class="exhibit-desc">Selection Panel of the 2023 UGC Teaching Award. Nominated by Lingnan University.</div>
+                    <div class="exhibit-desc-cn">2023年度大學教育資助委員會（教資會）傑出教學獎遴選委員會（由嶺南大學提名）。</div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2021–2022</div>
+                    <div class="exhibit-title">Teaching Excellence</div>
+                    <div class="exhibit-title-cn">TEAS優異獎及優秀指導教師獎</div>
+                    <div class="exhibit-desc">Merit (Team) for TEAS (Lingnan Univ); Teaching Excellence at 22nd & 23rd Qiyue Recitation Festival & 6th National College Art Exhibition.</div>
+                    <div class="exhibit-desc-cn">嶺南大學教學卓越及傑出服務獎（團隊優異獎）；全國第六屆大學生藝術展演、第22及23屆齊越節優秀指導教師獎。</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICE -->
+        <section id="service" class="animate-on-scroll">
+            <div class="section-number">04</div>
+            <div class="section-header">
+                <h2>Leadership & Service</h2>
+                <span class="cn">大學、專業及社會服務</span>
+            </div>
+
+            <!-- 16:9 PHOTO GALLERY -->
+            <div class="photo-gallery">
+                <img src="bianlun.jpg" alt="辯論活動與專家評審" class="photo-169" style="object-fit: cover;">
+                <img src="rotary.jpg" alt="扶輪社與青年服務" class="photo-169" style="object-fit: cover;">
+                <img src="warden.jpg" alt="舍監與大學服務" class="photo-169" style="object-fit: cover;">
+            </div>
+
+            <h3 style="font-family: var(--font-sans); color: var(--clr-red); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; border-bottom: 1px solid var(--clr-border); padding-bottom: 15px;">University & Department 大學與部門服務</h3>
+            <div class="exhibit-grid" style="margin-bottom: 80px;">
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2023–Pres</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Warden, Jockey Club Hostel (F)</div>
+                    <div class="exhibit-title-cn">賽馬會驥德堂（F座）舍監</div>
+                    <div class="exhibit-desc">Leading residential education and pastoral care. Also served as Acting Warden for Hostel B (Jul 2024, Oct 2025). <br><span class="cn" style="color:var(--clr-text-muted);">領導舍堂教育，並曾於2024年7月及2025年10月兼任B座宿舍代理舍監。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2020–Pres</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Senior Lecturer & Acting Head</div>
+                    <div class="exhibit-title-cn">CLEAC 高級講師及代理主任</div>
+                    <div class="exhibit-desc">Coordination of Co-curricular Programs (CHAMPINE). Frequently served as Acting Head of CLEAC during multiple periods (2024–2026). <br><span class="cn" style="color:var(--clr-text-muted);">負責燦品中文+統籌，並於2024至2026年間多次擔任CLEAC代理主任。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2024–2026</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Training & Camp Coordinator</div>
+                    <div class="exhibit-title-cn">內部培訓與文化營統籌</div>
+                    <div class="exhibit-desc">Coordinated "Gen AI for Workplace Competitiveness" Workshops for OSA (2025, 2026) and CLEAC staff trainings featuring Chen Qiufan & Prof. Lian Yuren. <br><span class="cn" style="color:var(--clr-text-muted);">統籌學生事務處「生成式 AI 提升職場競爭力」工作坊，以及陳楸帆與連育仁教授之教職員培訓。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2024–Pres</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Committees & Language Examiner</div>
+                    <div class="exhibit-title-cn">大學委員會與語言測試考官</div>
+                    <div class="exhibit-desc">Member of Catering Tender Panel (2025-) & Arts Biennale WG (2024-25). Appointed Tester for PSC, and Oral Examiner/Rater for CCCT & ACELO. <br><span class="cn" style="color:var(--clr-text-muted);">擔任餐廳投標評估及藝術雙年展小組成員；國家語委普通話水平測試（PSC）及 CCCT/ACELO 考官。</span></div>
+                </div>
+            </div>
+
+            <h3 style="font-family: var(--font-sans); color: var(--clr-red); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; border-bottom: 1px solid var(--clr-border); padding-bottom: 15px;">Academic & Community 學術與社會服務</h3>
+            <div class="exhibit-grid">
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2024–2025</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Major Competition Judge</div>
+                    <div class="exhibit-title-cn">大型比賽決賽評委</div>
+                    <div class="exhibit-desc">Final Judge for "Little Mouths, Big Wisdom" Radio Drama Comp (2025), HK Sec. School Putonghua Speech Comp (2025), and 53rd Int. Letter-Writing Comp HK (2024). <br><span class="cn" style="color:var(--clr-text-muted);">擔任「小嘴巴．大智慧」廣播劇比賽、全港中學生演講比賽及國際常規書信寫作比賽決賽評委。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2018–2024</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">RTHK & Media Expert</div>
+                    <div class="exhibit-title-cn">香港電台職務與媒體專家</div>
+                    <div class="exhibit-desc">Program Advisor for Putonghua Channel (2022-2024) & Guest Host (2018-2020) at RTHK. Inter-Collegiate Putonghua Debate Final Judge. <br><span class="cn" style="color:var(--clr-text-muted);">曾任香港電台普通話台節目顧問、客席主持及大專普通話辯論賽決賽評委。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2015–Pres</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">Education Bureau & Advisory</div>
+                    <div class="exhibit-title-cn">教育局與考評委員</div>
+                    <div class="exhibit-desc">Speaker for "Language in Film/TV" Seminars (HKEDB, 2023-24) & Scholar in 20th Anniv Promo (2023). Ad Hoc Comm Member (2015-19). Ext Examiner for HKMU LiPACE (2015-2020). <br><span class="cn" style="color:var(--clr-text-muted);">主講教育局「影視作品中的語言與文化」研討會；曾任普通話專責委員及香港公開大學LiPACE校外考官。</span></div>
+                </div>
+                <div class="exhibit-item">
+                    <div class="exhibit-year">2023–2026</div>
+                    <div class="exhibit-title" style="font-size: 1.3rem;">NGO & Social Mentorship</div>
+                    <div class="exhibit-title-cn">非政府組織與青年導師</div>
+                    <div class="exhibit-desc">Mentor for "Strive and Rise Programme" (2nd & 3rd Cohorts, 2024-25). Pres/Foundation Chair of Rotary Club of Eminence HK. <br><span class="cn" style="color:var(--clr-text-muted);">擔任「共創明『Teen』計劃」第二及第三期導師；香港匯賢扶輪社社長暨基金主委。</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCHOLARSHIP -->
+        <section id="scholarship" class="animate-on-scroll">
+            <div class="section-number">05</div>
+            <div class="section-header">
+                <h2>Scholarship & Curriculum</h2>
+                <span class="cn">學術研究、專案與課程開發</span>
+            </div>
+            
+            <div class="report-grid">
+                <div>
+                    <h4 style="color:var(--clr-text-main); font-size:1.1rem; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase;">Curriculum Dev. & Professional Works / 課程與教材開發</h4>
+                    <ul class="clean-list">
+                        <li><strong>Credit Course Development</strong><span>Developed major courses including LCC3220 (Chinese Writing in the Workplace), LCC2250 (Chinese Xiqu Art), LCC1803 (Business Cantonese), and LCC1802 (Practical Cantonese). <br><span class="cn">開發 LCC3220、LCC2250、LCC1803 及 LCC1802 等多門學分課程。</span></span></li>
+                        <li><strong>Curriculum Architecture</strong><span>Designed the Minor Programme of Putonghua and established the Diagnostic and Exemption Test (DET). <br><span class="cn">設計普通話副修課程架構以及診斷及豁免測試（DET）。</span></span></li>
+                        <li><strong>Textbooks & Assessment Materials</strong><span>Revised Basic, Practical, and Advanced Putonghua textbooks. Compiled the <em>3500 Common Characters for Putonghua</em> list. Proofread Pinyin subtitles for HKEDB videos (2024). <br><span class="cn">修訂初、中、高階普通話教材，編寫《普通話3500個常用字表》，並為教育局校對影片拼音字幕。</span></span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color:var(--clr-text-main); font-size:1.1rem; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase;">Research & Grant Projects / 學術研究與撥款</h4>
+                    <ul class="clean-list">
+                        <li><strong>Ongoing Research (2020–Pres)</strong><span>Leading 5 projects: Written Chinese Proficiency Test in HK, Blended Learning in Chinese Courses, CLEAC Annual Evaluation, Putonghua Pronunciation Diagnostic Assessment (PPDA), and LGAS Attribute Study. <br><span class="cn">進行中：香港地區中文書面語測試、混合式學習、CLEAC年度評估、PPDA 及 LGAS 特質研究。</span></span></li>
+                        <li><strong>Funded Projects (LEO & Tin Ka Ping)</strong><span>"Exploring Chinese Charisma" (HK$900k) & GBA "Characteristic Affection, Classical Aspirations" Research Project (HK$2.23M). <br><span class="cn">嶺南教育機構及田家炳基金會大灣區教學發展研究計劃（總額逾310萬港元）。</span></span></li>
+                        <li><strong>Early Ed-Tech Projects (2005–2006)</strong><span>Pioneered Putonghua TTS system, Pinyin Converter (Biaoyinyi), and primary/secondary self-learning software. <br><span class="cn">早期完成普通話語音合成系統(TTS)、拼音轉換器及中小學自學軟件等技術專案。</span></span></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="report-grid" style="margin-top: 20px;">
+                <div>
+                    <h4 style="color:var(--clr-text-main); font-size:1.1rem; margin-bottom:30px; letter-spacing:1px; text-transform:uppercase;">Publications / 出版與期刊</h4>
+                    <ul class="clean-list">
+                        <li><strong>Hong Kong Wen Wei Po</strong><span>Authored articles on Putonghua expressions and multimedia learning (2024). <br><span class="cn">於《香港文匯報》發表普通話用語及多媒體學習之相關文章。</span></span></li>
+                        <li><strong>Academic Journals</strong><span>Eileen Chang's novel analysis published in <em>時代文學</em> & <em>Heze Daily</em>. <br><span class="cn">於《時代文學》及《菏澤日報》發表張愛玲小說分析等學術文章。</span></span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- STUDENTS -->
+        <section id="students" class="animate-on-scroll" style="border-bottom: none;">
+            <div class="section-number">06</div>
+            <div class="section-header">
+                <h2>Mentorship</h2>
+                <span class="cn">指導學生獎項與成就</span>
+            </div>
+            
+            <div class="table-preface">
+                "Continually striving to inspire Lingnan University students to participate in national tertiary-level competitions. Under my supervision, we achieved 36 major awards across prestigious national Chinese competitions (2020-2025)."<br>
+                <span class="cn" style="font-size: 0.9em; font-family: var(--font-cn); display:block; margin-top:10px; color: var(--clr-text-muted);">「致力啟發嶺南學子參與全國性高等教育競賽。在我的指導下，師生團隊於2020至2025學年期間，在四大最具代表性的全國中文競賽中勇奪36項重要殊榮；並指導學生於主流媒體發表文化考察專欄。」</span>
+            </div>
+
+            <table class="directory-table">
+                <thead>
+                    <tr>
+                        <th width="15%">Year <span class="cn">年份</span></th>
+                        <th width="40%">Exhibition / Publication <span class="cn">展演、比賽與發表</span></th>
+                        <th width="25%">Awardees / Authors <span class="cn">獲獎者與作者</span></th>
+                        <th width="20%">Award <span class="cn">獎項</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 2025 Publication -->
+                    <tr>
+                        <td class="dir-year">2025</td>
+                        <td>
+                            <span class="dir-event-en">Hong Kong Wen Wei Po (July 2025)</span>
+                            <span class="dir-event-cn">《香港文匯報》文化考察專欄</span>
+                        </td>
+                        <td>Chen Zihan, Huang Jun<br><span class="cn" style="color:var(--clr-text-muted)">陳子涵、黃俊</span></td>
+                        <td>Published Article<br><span class="cn" style="color:var(--clr-text-muted)">文章發表</span></td>
+                    </tr>
+                    
+                    <!-- 2024-2025 -->
+                    <tr>
+                        <td rowspan="2" class="dir-year">2024–25</td>
+                        <td rowspan="2">
+                            <span class="dir-event-en">7th National Univ. Art Exhibition</span>
+                            <span class="dir-event-cn">全國第七屆大學生藝術展演</span>
+                            <span class="dir-org">Ministry of Education, PRC</span>
+                        </td>
+                        <td>Yeung Choi-yee, Lam Sze-nga, Chow Lok-yi, Leung Wai-lam</td>
+                        <td>Third Prize<br><span class="cn" style="color:var(--clr-text-muted)">三等獎</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="dir-highlight">Dr. ZHOU Bo 周博博士</span></td>
+                        <td><span class="dir-highlight">Teaching Excellence<br><span class="cn">優秀指導教師獎</span></span></td>
+                    </tr>
+
+                    <!-- 2023-2024 -->
+                    <tr>
+                        <td class="dir-year">2023–24</td>
+                        <td>
+                            <span class="dir-event-en">25th Qi Yue Recitation Festival</span>
+                            <span class="dir-event-cn">第25屆齊越朗誦藝術節</span>
+                        </td>
+                        <td>Li Jiapeng, He Mushan, Tian Xuetong</td>
+                        <td>Outstanding Work<br><span class="cn" style="color:var(--clr-text-muted)">優秀作品獎</span></td>
+                    </tr>
+
+                    <!-- 2022-2023 -->
+                    <tr>
+                        <td rowspan="3" class="dir-year">2022–23</td>
+                        <td rowspan="3">
+                            <span class="dir-event-en">24th Qi Yue Recitation Festival</span>
+                            <span class="dir-event-cn">第24屆齊越朗誦藝術節</span>
+                        </td>
+                        <td>LUI Kin Yee, ZHAN Aifan, ZHAO Sikun, TSANG Chi Hin</td>
+                        <td>Best Performance<br><span class="cn" style="color:var(--clr-text-muted)">最佳藝術表現獎</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="dir-highlight">Dr. ZHOU Bo 周博博士</span></td>
+                        <td><span class="dir-highlight">Teaching Excellence<br><span class="cn">優秀指導教師獎</span></span></td>
+                    </tr>
+                    <tr>
+                        <td>Lingnan University <span class="cn" style="color:var(--clr-text-muted); display:block;">嶺南大學</span></td>
+                        <td>Outstanding Org.<br><span class="cn" style="color:var(--clr-text-muted)">優秀組織獎</span></td>
+                    </tr>
+
+                    <!-- 2021-2022 -->
+                    <tr>
+                        <td rowspan="3" class="dir-year">2021–22</td>
+                        <td>
+                            <span class="dir-event-en">23rd Qi Yue Recitation Festival</span>
+                            <span class="dir-event-cn">第23屆齊越朗誦藝術節</span>
+                        </td>
+                        <td>
+                            Lui Kin-yee, Zhao Wenxuan<br>
+                            <span class="dir-highlight" style="margin-top:10px;">Dr. ZHOU Bo 周博博士</span>
+                        </td>
+                        <td>
+                            Youth Spirit Award<br><span class="cn" style="color:var(--clr-text-muted)">青年風貌特別獎</span><br>
+                            <span class="dir-highlight" style="margin-top:10px;">Teaching Excellence<br><span class="cn">優秀指導教師獎</span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="dir-event-en">Jiangsu, HK & Macau Classics</span>
+                            <span class="dir-event-cn">蘇港澳高校中華經典誦讀展演</span>
+                        </td>
+                        <td>Zhan Aifan, Zhao Wenxuan</td>
+                        <td>Youth Spirit Award<br><span class="cn" style="color:var(--clr-text-muted)">青年風貌特別獎</span></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="dir-event-en">"Awakening the Ears" Exhibition</span>
+                            <span class="dir-event-cn">“喚醒耳朵——深港澳大學生展演”</span>
+                        </td>
+                        <td>Wang Heng, Xu Yanyuan, Yuen Chun Ho...</td>
+                        <td>Outstanding Work<br><span class="cn" style="color:var(--clr-text-muted)">優秀作品獎</span></td>
+                    </tr>
+
+                    <!-- 2020-2021 -->
+                    <tr>
+                        <td rowspan="2" class="dir-year">2020–21</td>
+                        <td>
+                            <span class="dir-event-en">6th National Univ. Art Exhibition</span>
+                            <span class="dir-event-cn">全國第六屆大學生藝術展演</span>
+                        </td>
+                        <td>
+                            Pun Hok Lam, Lee Wenxin...<br>
+                            <span class="dir-highlight" style="margin-top:10px;">Dr. ZHOU Bo 周博博士</span>
+                        </td>
+                        <td>
+                            Third Prize<br><span class="cn" style="color:var(--clr-text-muted)">三等獎</span><br>
+                            <span class="dir-highlight" style="margin-top:10px;">Teaching Excellence<br><span class="cn">優秀指導教師獎</span></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="dir-event-en">22nd Qi Yue Recitation Festival</span>
+                            <span class="dir-event-cn">第22屆齊越朗誦藝術節</span>
+                        </td>
+                        <td>
+                            Data Science Student<br>
+                            <span class="dir-highlight" style="margin-top:10px;">Dr. ZHOU Bo 周博博士</span>
+                        </td>
+                        <td>
+                            Youth Spirit Award<br><span class="cn" style="color:var(--clr-text-muted)">青年風貌特別獎</span><br>
+                            <span class="dir-highlight" style="margin-top:10px;">Teaching Excellence<br><span class="cn">優秀指導教師獎</span></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <!-- Scripts for Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Hero Title Staggered Animation
+            const titleEn = document.getElementById("title-en");
+            const textEn = titleEn.getAttribute("data-text");
+            titleEn.innerHTML = "";
+            [...textEn].forEach((char, index) => {
+                const span = document.createElement("span");
+                span.innerText = char;
+                if(char === '.') span.classList.add('dot');
+                span.classList.add('char-span');
+                span.style.transitionDelay = `${index * 0.05}s`;
+                titleEn.appendChild(span);
+                setTimeout(() => {
+                    span.style.opacity = "1";
+                    span.style.transform = "translateY(0)";
+                }, 100);
+            });
+
+            const titleCn = document.getElementById("title-cn");
+            const textCn = titleCn.getAttribute("data-text");
+            titleCn.innerHTML = "";
+            [...textCn].forEach((char, index) => {
+                const span = document.createElement("span");
+                span.innerText = char;
+                span.classList.add('char-span');
+                span.style.transitionDelay = `${(textEn.length * 0.05) + (index * 0.1)}s`;
+                titleCn.appendChild(span);
+                setTimeout(() => {
+                    span.style.opacity = "1";
+                    span.style.transform = "translateY(0)";
+                }, 100);
+            });
+
+            // 2. Scroll Animations
+            const reveals = document.querySelectorAll(".animate-on-scroll");
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+            reveals.forEach(reveal => observer.observe(reveal));
+            
+            // Check immediately for items in view
+            setTimeout(() => {
+                reveals.forEach(reveal => {
+                    if (reveal.getBoundingClientRect().top < window.innerHeight) {
+                        reveal.classList.add("visible");
+                    }
+                });
+            }, 100);
+
+            // 3. Top Progress Bar
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progress-bar").style.width = scrolled + "%";
+            });
+        });
+    </script>
+</body>
+</html>
